@@ -7,25 +7,24 @@ from sklearn.model_selection import KFold
 
 """
     Classe para processar o dataset
-    Obs: o dataset tem que ser para problemas de classificacao e nele tem que conter uma coluna Class
 """
 class ProcessarDados:
     def __init__(self, path_dataset):
         self.path_dataset = path_dataset
         self.data = pd.read_csv(path_dataset, sep=',', header=0)
 
-    def normalization(self):
-        x_mean = self.data_x().mean(axis=0)
-        x_std = self.data_x().std(axis=0)
-        return (self.data_x() - x_mean) / x_std, x_mean, x_std
+    # def normalization(self):
+    #     x_mean = self.data_x().mean(axis=0)
+    #     x_std = self.data_x().std(axis=0)
+    #     return (self.data_x() - x_mean) / x_std, x_mean, x_std
 
     # retorna os atributos ou features dos dados
     def data_x(self):
-        return self.data.loc[:, self.data.columns != 'Class'].values
+        return self.data.values[0:, 0:10]
 
     # retorna as labels (classes) dos dados
     def data_y(self):
-        return self.data[['Class']].values
+        return self.data.values[0:, 10]
 
     # Retorna os dados (misturados) particionados na sequencia em X_train, X_test, y_train, y_test
     # @perc_test percentual de dados para o teste
