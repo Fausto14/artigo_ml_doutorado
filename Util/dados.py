@@ -28,8 +28,8 @@ class ProcessarDados:
 
     # Retorna os dados (misturados) particionados na sequencia em X_train, X_test, y_train, y_test
     # @perc_test percentual de dados para o teste
-    def holdout(self, perc_test):
-        return train_test_split(self.data_x(), self.data_y(), test_size=perc_test, random_state=None, shuffle=True)
+    def holdout(self, perc_test, seed):
+        return train_test_split(self.data_x(), self.data_y(), test_size=perc_test, random_state=seed, shuffle=True)
 
     # Retorna k grupos de dados aleatorio do dataset (datax,datay)
     # Para cada grupo, temos a posicao 0: x_train, 1: y_train, 2: x_test, 3: y_test
