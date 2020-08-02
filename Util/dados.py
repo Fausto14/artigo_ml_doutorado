@@ -30,12 +30,15 @@ class ProcessarDados:
     # @perc_test percentual de dados para o teste
     def holdout(self, perc_test, seed):
         return train_test_split(self.data_x(), self.data_y(), test_size=perc_test, random_state=seed, shuffle=True)
+    
+    def holdout2(self, perc_test, seed):
+        return train_test_split(self.data_x(), self.data_y(), test_size=perc_test, random_state=seed, shuffle=True, stratify=self.data_y())
 
     # Retorna k grupos de dados aleatorio do dataset (datax,datay)
     # Para cada grupo, temos a posicao 0: x_train, 1: y_train, 2: x_test, 3: y_test
-    def kfolds(self, _datax, _datay, k):
+    def kfolds(self, _datax, _datay, k, seed):
         folds_data = []
-        kf = KFold(n_splits=k, random_state=None, shuffle=True)
+        kf = KFold(n_splits=k, random_state=seed, shuffle=True)
         for train_index, test_index in kf.split(_datax):
             x_train, x_test = _datax[train_index], _datax[test_index]
             y_train, y_test = _datay[train_index], _datay[test_index]
